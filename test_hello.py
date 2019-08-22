@@ -21,7 +21,7 @@ def run_hello_script(runner, name, school, mass=1, height=1) -> "tuple[str, str]
     script_name = "hello.py"
     working_dir = os.path.dirname(os.path.abspath(__file__))
     script = runner.run('python3.7', script_name, stdin=MockStdin([name, school, str(mass), str(height)]),
-                        cwd=working_dir, shell=True)
+                        cwd=working_dir)
     return script.stdout, script.stderr
 
 
@@ -31,7 +31,6 @@ def run_hello_script(runner, name, school, mass=1, height=1) -> "tuple[str, str]
 @mock.patch('builtins.input', side_effect=lambda x="prompt": "1")
 def test_no_SyntaxError(capsys):
     import hello
-
 
 @pytest.mark.timeout(1.0)
 @pytest.mark.script_launch_mode('subprocess')
